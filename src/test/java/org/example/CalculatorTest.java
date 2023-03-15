@@ -24,17 +24,17 @@ public class CalculatorTest {
     @DisplayName("덧셈 연산을 수행한다.")
     @ParameterizedTest
     @MethodSource("fomulaAndResult")
-    void calculateTest(PositiveNumber operand1, String operator, PositiveNumber operand2, PositiveNumber result) {
+    void calculateTest(PositiveNumber operand1, String operator, PositiveNumber operand2, int result) {
         int calculateResult = Calculator.calcuate(operand1, operator, operand2);
         assertThat(calculateResult).isEqualTo(result);
     }
 
     private static Stream<Arguments> fomulaAndResult() {
         return Stream.of(
-                arguments(1, "+", 2, 3),
-                arguments(1, "-", 2, -1),
-                arguments(4, "*", 2, 8),
-                arguments(4, "/", 2, 2)
+                arguments(new PositiveNumber(1), "+", new PositiveNumber(2), 3),
+                arguments(new PositiveNumber(1), "-", new PositiveNumber(2), -1),
+                arguments(new PositiveNumber(4), "*", new PositiveNumber(2), 8),
+                arguments(new PositiveNumber(4), "/", new PositiveNumber(2), 2)
         );
     }
     @DisplayName("나눗셈에서 0을 나누는 경우 IllegalArgument 예외를 발생시킨다.") // PositiveNumber 에서 0 Validation 체크를 해주므로 필요없어지는 테스트 코드, PositiveNumberTest 로 create 테스트 진행하는게 좋음
